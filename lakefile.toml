@@ -1,0 +1,9 @@
+name = "craneq"
+version = "0.1.0"
+defaultTargets = ["CraneQ", "CraneQTests"]
+
+[[lean_lib]]
+name = "CraneQ"
+
+[[lean_lib]]
+name = "CraneQTests"
