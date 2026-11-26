@@ -71,3 +71,17 @@ individuals filing separately who fall outside the other named categories.
 A later period needs its own source selection. The tests
 are synthetic, and native compilation and tax-domain approval remain pending.
 [2024 Code and IRS adjustment evidence](https://github.com/craneq-io/tax-sources/blob/e0173c093f195165411a37897aeb8abf79b11f6f/evidence/26-usc-63/sources.json)
+
+### Gain or loss on one brokerage disposition
+
+`Section1001.realized2024` computes signed realized gain or loss in USD cents
+under § 1001(a). The caller establishes a calendar-2024 disposition, its amount
+realized under § 1001(b), and a § 1011 adjusted basis that applies to both gain
+and loss. For a synthetic sale with $99.99 realized and a $100.00 adjusted
+basis, the result is −1 cent. A blank basis in a brokerage record leaves the
+result unresolved. A documented zero basis is a valid input.
+
+Lot identification, basis adjustments and valuation happen upstream. Different
+gain and loss bases fall outside this exercise. Recognition under § 1001(c),
+loss deductibility, holding period, return reporting and form preparation require
+separate rules and evidence. [2024 U.S. Code, § 1001](https://www.govinfo.gov/content/pkg/USCODE-2024-title26/html/USCODE-2024-title26-subtitleA-chap1-subchapO-partI-sec1001.htm)
