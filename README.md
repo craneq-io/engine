@@ -53,7 +53,7 @@ period is an implementation decision separate from the edition of the Code.
 
 | Entry point | Caller establishes | Result |
 | --- | --- | --- |
-| `Section7703.evaluate2024` | The referring provision invokes § 7703(a), the death timeline and facts of one spousal relationship | Assessment time and marital finding |
+| `Section7703.evaluate2024` | Part V of subchapter B of chapter 1 applies or another provision refers to § 7703(a), the death timeline and facts of one spousal relationship | Assessment time and marital finding |
 | `Section63.basic2024` | Ordinary nonitemizer case and the § 63(c)(2) category | Basic standard deduction in whole dollars |
 | `Section63.standard2024` | The same evidence plus the independently determined additional amount under § 63(c)(3) and (f) | Basic plus additional under § 63(c)(1) |
 
@@ -65,6 +65,9 @@ household. A marital finding alone cannot supply that classification.
 
 The deduction exercise excludes itemizers, § 63(c)(5) dependent limitations,
 § 63(c)(6) zero-deduction cases and special disaster-loss increases. It covers
-only calendar 2024. A later period needs its own source selection. The tests
+only calendar 2024. Fiscal years beginning in 2024 also fall outside this pilot.
+The residual category covers otherwise eligible unmarried individuals and married
+individuals filing separately who fall outside the other named categories.
+A later period needs its own source selection. The tests
 are synthetic, and native compilation and tax-domain approval remain pending.
 [2024 Code and IRS adjustment evidence](https://github.com/craneq-io/tax-sources/blob/e0173c093f195165411a37897aeb8abf79b11f6f/evidence/26-usc-63/sources.json)

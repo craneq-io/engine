@@ -68,7 +68,8 @@ def scope2024 : RuleScope := {
     "26 USC 7703(a)(1)–(2), 2024 edition"⟩
 }
 
-/-- The caller has established that the referring provision uses subsection (a).
+/-- The caller has established that part V of subchapter B of chapter 1 applies
+or that another provision refers to subsection (a).
 Keep timing and missing evidence distinct from a classification. -/
 def evaluate2024 (ctx : Context) (death : DeathEvidence)
     (factsAt : AssessmentTime → Relationship) : Outcome Assessment :=
