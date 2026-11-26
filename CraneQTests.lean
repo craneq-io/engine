@@ -32,3 +32,36 @@ example : assess .noSpouseDeathDuringYear (fun _ => .unresolved) =
     ⟨some .yearClose, .unresolved⟩ := rfl
 
 end CraneQTests
+
+namespace CraneQTests.Framework
+open CraneQ
+open CraneQ.US.IRC
+
+private def federal (year : Nat) : Context := ⟨some .usFederal, some (.calendarYear year)⟩
+
+example : Section7703.evaluate2024 (federal 2024) .spouseDiedDuringYear
+    (fun _ => .legallySeparatedUnderQualifyingDecree) =
+    .determined ⟨some .timeOfSpouseDeath, .treatedAsUnmarried⟩ := rfl
+example : Section7703.evaluate2024 (federal 2024) .unresolved (fun _ => .unmarried) =
+    .unresolved "spousal death timeline" := rfl
+
+example : Section63.basic2024 (federal 2024) (some .ordinary) (some .jointReturn) = .determined 29200 := rfl
+example : Section63.basic2024 (federal 2024) (some .ordinary) (some .qualifyingSurvivingSpouse) = .determined 29200 := rfl
+example : Section63.basic2024 (federal 2024) (some .ordinary) (some .headOfHousehold) = .determined 21900 := rfl
+example : Section63.basic2024 (federal 2024) (some .ordinary) (some .other) = .determined 14600 := rfl
+example : Section63.standard2024 (federal 2024) (some .ordinary) (some .jointReturn) (some 1550) =
+    .determined 30750 := rfl
+example : Section63.standard2024 (federal 2024) (some .ordinary) (some .other) (some 0) = .determined 14600 := rfl
+example : Section63.standard2024 (federal 2024) (some .ordinary) (some .other) none =
+    .unresolved "additional deduction amount" := rfl
+example : Section63.basic2024 (federal 2024) none (some .other) =
+    .unresolved "ordinary deduction eligibility" := rfl
+example : Section63.basic2024 (federal 2024) (some .ordinary) none = .unresolved "deduction category" := rfl
+example : Section63.basic2024 (federal 2024) (some .specialTreatment) none =
+    .outsideScope "election, limitation, or special treatment" := rfl
+example : Section63.basic2024 (federal 2025) none none = .outsideScope "taxable period" := rfl
+example : Section63.basic2024 ⟨some (.other "US-CA"), none⟩ none none = .outsideScope "jurisdiction" := rfl
+example : Section63.basic2024 ⟨none, some (.calendarYear 2024)⟩ none none = .unresolved "jurisdiction" := rfl
+example : Section63.basic2024 ⟨some .usFederal, none⟩ none none = .unresolved "taxable period" := rfl
+
+end CraneQTests.Framework

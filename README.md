@@ -43,3 +43,31 @@ disables the upstream optional CaDiCaL and leantar downloads. The examples use
 neither tool. The script runs the stage 1 Lake against a clean copy of the
 committed engine and prints the job ID and source revisions after success.
 This bootstrap still awaits its first successful native queue receipt.
+
+## Federal calendar-year 2024 exercises
+
+`CraneQ.Framework` gives each rule a jurisdiction, a supported taxable period
+and citations into an immutable source manifest. A result can be determined,
+unresolved because a fact is missing, or outside the modeled scope. The covered
+period is an implementation decision separate from the edition of the Code.
+
+| Entry point | Caller establishes | Result |
+| --- | --- | --- |
+| `Section7703.evaluate2024` | Part V of subchapter B of chapter 1 applies or another provision refers to § 7703(a), the death timeline and facts of one spousal relationship | Assessment time and marital finding |
+| `Section63.basic2024` | Ordinary nonitemizer case and the § 63(c)(2) category | Basic standard deduction in whole dollars |
+| `Section63.standard2024` | The same evidence plus the independently determined additional amount under § 63(c)(3) and (f) | Basic plus additional under § 63(c)(1) |
+
+For a fictional eligible joint return in calendar 2024, the basic amount is
+2 × $14,600 = $29,200. An independently established additional $1,550 yields
+$30,750. An unknown additional amount leaves the sum unresolved. Separate
+review establishes a joint return, qualifying surviving spouse or head of
+household. A marital finding alone cannot supply that classification.
+
+The deduction exercise excludes itemizers, § 63(c)(5) dependent limitations,
+§ 63(c)(6) zero-deduction cases and special disaster-loss increases. It covers
+only calendar 2024. Fiscal years beginning in 2024 also fall outside this pilot.
+The residual category covers otherwise eligible unmarried individuals and married
+individuals filing separately who fall outside the other named categories.
+A later period needs its own source selection. The tests
+are synthetic, and native compilation and tax-domain approval remain pending.
+[2024 Code and IRS adjustment evidence](https://github.com/craneq-io/tax-sources/blob/e0173c093f195165411a37897aeb8abf79b11f6f/evidence/26-usc-63/sources.json)
