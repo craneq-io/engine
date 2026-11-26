@@ -6,6 +6,11 @@ test "$(uname -sm)" = "Darwin arm64"
 export PATH=/usr/bin:/bin:/usr/sbin:/sbin
 engine=$(cd "$(dirname "$0")/.." && pwd -P)
 cd "$engine"
+revision=$(git rev-parse --verify HEAD)
+# Both tracked content and staging must match the revision named in the receipt.
+git diff --quiet "$revision" -- || { echo 'tracked checkout differs from HEAD' >&2; exit 1; }
+git diff --cached --quiet "$revision" -- || { echo 'index differs from HEAD' >&2; exit 1; }
+git ls-files --error-unmatch toolchain/native-check.sh toolchain/sources.lock toolchain/no-optional-tools.patch >/dev/null
 test "$(cat lean-toolchain)" = 'leanprover/lean4:v4.35.0'
 commit=eb6cafb7290e8bd5f2937522d8d804f58f02bafc
 ref=refs/tags/v4.35.0
@@ -51,6 +56,7 @@ lean --version
 lake --version
 # Use a clean copy of the committed source so cached .oleans cannot mask failures.
 mkdir "$work/engine"
-git archive HEAD | tar -xf - -C "$work/engine"
+git archive --output="$work/engine.tar" "$revision"
+tar -xf "$work/engine.tar" -C "$work/engine"
 (cd "$work/engine" && lake build)
-printf 'job=%s engine=%s lean_source=%s\n' "$YUREI_BUILD_JOB" "$(git rev-parse HEAD)" "$commit"
+printf 'job=%s engine=%s lean_source=%s\n' "$YUREI_BUILD_JOB" "$revision" "$commit"
