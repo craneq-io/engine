@@ -4,10 +4,10 @@ namespace CraneQ.US.IRC.PropertyBasis
 
 private def revision := "54739fc202d8c5f8fb1ad5659bb578067a6c188c"
 
-private def statute (section subdivision : String) : SourceRef :=
-  ⟨revision, "manifests/usc/26/" ++ section ++ "/2024.json",
-    "USCODE-2024-title26-subtitleA-chap1-subchapO-partII-sec" ++ section,
-    "26 USC " ++ section ++ subdivision ++ ", 2024 edition"⟩
+private def statute (sectionNumber subdivision : String) : SourceRef :=
+  ⟨revision, "manifests/usc/26/" ++ sectionNumber ++ "/2024.json",
+    "USCODE-2024-title26-subtitleA-chap1-subchapO-partII-sec" ++ sectionNumber,
+    "26 USC " ++ sectionNumber ++ subdivision ++ ", 2024 edition"⟩
 
 def scope2024 : RuleScope := {
   jurisdiction := .usFederal
