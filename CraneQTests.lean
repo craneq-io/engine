@@ -65,3 +65,22 @@ example : Section63.basic2024 ⟨none, some (.calendarYear 2024)⟩ none none = 
 example : Section63.basic2024 ⟨some .usFederal, none⟩ none none = .unresolved "taxable period" := rfl
 
 end CraneQTests.Framework
+
+namespace CraneQTests.Disposition
+open CraneQ
+open CraneQ.US.IRC.Section1001
+
+private def year2024 : Context := ⟨some .usFederal, some (.calendarYear 2024)⟩
+
+-- Adjacent cent amounts exercise sign, equality and subtraction without truncation.
+example : realized2024 year2024 (some 10001) (.common 10000) = .determined 1 := rfl
+example : realized2024 year2024 (some 9999) (.common 10000) = .determined (-1) := rfl
+example : realized2024 year2024 (some 10000) (.common 10000) = .determined 0 := rfl
+example : realized2024 year2024 (some 125) (.common 0) = .determined 125 := rfl
+example : realized2024 year2024 (some 125) .unresolved = .unresolved "adjusted basis" := rfl
+example : realized2024 year2024 none (.common 0) = .unresolved "amount realized" := rfl
+example : realized2024 year2024 none .unresolved = .unresolved "adjusted basis and amount realized" := rfl
+example : realized2024 year2024 (some 10000) .differentGainAndLossBases =
+    .outsideScope "different gain and loss bases" := rfl
+
+end CraneQTests.Disposition
