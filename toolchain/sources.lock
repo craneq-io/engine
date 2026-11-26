@@ -1,0 +1,5 @@
+cmake c7396c3d34c950b3116915ca176c2f85bf4aeeaf9a62f248a5553cd0741fd684 https://codeload.github.com/Kitware/CMake/tar.gz/refs/tags/v3.31.9
+pkgconf cd05c9589b9f86ecf044c10a2269822bc9eb001eced2582cfffd658b0a50c243 https://distfiles.ariadne.space/pkgconf/pkgconf-2.5.1.tar.xz
+openssl 4ca7d770686ae621c88c78ee20a49c11aaa984c354ed038137ba87850e5386b8 https://codeload.github.com/openssl/openssl/tar.gz/refs/tags/openssl-3.5.5
+libuv 478baf2599bfbc882c355288c9cb6f92e0e7dda435fa04031fa5b607cf3f414c https://codeload.github.com/libuv/libuv/tar.gz/refs/tags/v1.52.1
+lean4 6747b099d03d3675f2716e7cf5924a16bfbf75822b13a3d36f51f933ffcc307b https://codeload.github.com/leanprover/lean4/tar.gz/refs/tags/v4.35.0
