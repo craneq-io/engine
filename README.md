@@ -18,7 +18,10 @@ The pilot handles a single spousal relationship. It assumes someone has already 
 
 - [Lean implementation](CraneQ/US/IRC/Section7703.lean)
 - [Executable boundary examples](CraneQTests.lean)
+- [Pinned source manifest](https://github.com/craneq-io/tax-sources/blob/29c82c2a6699dc098388d4b09aff661f254caaa5/manifests/usc/26/7703/2024.json)
 - GPO granule `USCODE-2024-title26-subtitleF-chap79-sec7703`, HTML SHA-256 `e88d61d4c0c8709e650c77ae37a3a9b123b828a85d9407e0dbc58f31df811938`.
+
+The initial translation is a review candidate. The first native build request stopped before compilation because the runner lacked Lake. Both the Lean check and independent tax-domain review are pending.
 
 ## Build and check
 
