@@ -1,7 +1,7 @@
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -45,3 +45,3 @@
--# Don't do anything with cadical/leantar on wasm
+@@ -45,3 +45,4 @@
+ # Don't do anything with cadical/leantar on wasm
 -if(NOT CMAKE_SYSTEM_NAME MATCHES "Emscripten")
 +option(BUILD_AUXILIARY_TOOLS "Build CaDiCaL and leantar" ON)
 +if(BUILD_AUXILIARY_TOOLS AND NOT CMAKE_SYSTEM_NAME MATCHES "Emscripten")
