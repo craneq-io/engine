@@ -32,3 +32,14 @@ lake build
 ```
 
 The default targets cover both the library and its examples. Each example states an expected result as a Lean equality, so a change that breaks one fails the build. Passing the examples establishes behavior of the encoded rule; legal interpretation and effective-date coverage require domain review.
+
+Maintainers can bootstrap the verifier and run the examples in one native Darwin
+arm64 queue job with `sh toolchain/native-check.sh`. The build needs the Apple
+compiler, SDK, make, Perl, Git, curl, tar and patch from the approved builder
+image. It downloads and verifies the five source archives in
+[`toolchain/sources.lock`](toolchain/sources.lock), then builds CMake, pkgconf,
+OpenSSL, libuv and Lean under a job-local temporary directory. An explicit patch
+disables the upstream optional CaDiCaL and leantar downloads. The examples use
+neither tool. The script runs the stage 1 Lake against a clean copy of the
+committed engine and prints the job ID and source revisions after success.
+This bootstrap still awaits its first successful native queue receipt.
