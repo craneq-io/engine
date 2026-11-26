@@ -1,3 +1,5 @@
+import CraneQ.Framework
+
 /-!
 # 26 U.S.C. § 7703(a), 2024 edition
 
@@ -57,5 +59,24 @@ def assess (death : DeathEvidence) (factsAt : AssessmentTime → Relationship) :
       | .unmarried | .legallySeparatedUnderQualifyingDecree => .treatedAsUnmarried
       | .unresolved => .unresolved
     ⟨some t, finding⟩
+
+def scope2024 : RuleScope := {
+  jurisdiction := .usFederal
+  period := .calendarYear 2024
+  primarySource := ⟨"29c82c2a6699dc098388d4b09aff661f254caaa5",
+    "manifests/usc/26/7703/2024.json", "USCODE-2024-title26-subtitleF-chap79-sec7703",
+    "26 USC 7703(a)(1)–(2), 2024 edition"⟩
+}
+
+/-- The caller has established that the referring provision uses subsection (a).
+Keep timing and missing evidence distinct from a classification. -/
+def evaluate2024 (ctx : Context) (death : DeathEvidence)
+    (factsAt : AssessmentTime → Relationship) : Outcome Assessment :=
+  scope2024.evaluate ctx fun _ =>
+    let result := assess death factsAt
+    match result.time, result.finding with
+    | none, _ => .unresolved "spousal death timeline"
+    | some _, .unresolved => .unresolved "relationship at the selected time"
+    | some _, _ => .determined result
 
 end CraneQ.US.IRC.Section7703
