@@ -38,9 +38,13 @@ export PATH="$prefix/bin:$PATH"
 (cd "$work/pkgconf" && ./configure --prefix="$prefix" && make -j"$jobs" && make install)
 (cd "$work/openssl" && ./Configure darwin64-arm64-cc no-shared no-tests --prefix="$prefix" --libdir=lib &&
     make -j"$jobs" && make install_sw)
-cmake -S "$work/libuv" -B "$work/uv-build" -DCMAKE_INSTALL_PREFIX="$prefix" -DLIBUV_BUILD_TESTS=OFF
+# Both bootstrap stages launch Lake with their own rpaths. Point the installed
+# libuv dylib at its verified job-local prefix before linking either stage.
+cmake -S "$work/libuv" -B "$work/uv-build" -DCMAKE_INSTALL_PREFIX="$prefix" \
+    -DCMAKE_INSTALL_NAME_DIR="$prefix/lib" -DLIBUV_BUILD_TESTS=OFF
 cmake --build "$work/uv-build" --parallel "$jobs"
 cmake --install "$work/uv-build"
+test "$(otool -D "$prefix/lib/libuv.dylib" | tail -n 1)" = "$prefix/lib/libuv.1.dylib"
 
 export PKG_CONFIG_LIBDIR="$prefix/lib/pkgconfig"
 unset PKG_CONFIG_PATH

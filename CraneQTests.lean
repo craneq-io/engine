@@ -84,3 +84,32 @@ example : realized2024 year2024 (some 10000) .differentGainAndLossBases =
     .outsideScope "different gain and loss bases" := rfl
 
 end CraneQTests.Disposition
+
+namespace CraneQTests.Property
+open CraneQ
+open CraneQ.US.IRC.PropertyBasis
+open CraneQ.US.Forms.Form8949
+
+private def ctx : Context := ⟨some .usFederal, some (.calendarYear 2024)⟩
+private def gift : BasisFacts := .outrightGift (some 10000) (some 8000)
+
+example : adjusted2024 ctx (.ordinaryPurchase (some 10000) (some 200)) = .determined ⟨10200, 10200⟩ := rfl
+example : realized2024 ctx (some 10000) (.ordinaryPurchase (some 10000) (some 200)) = .determined (-200) := rfl
+example : adjusted2024 ctx (.ordinaryPurchase (some 10000) none) = .unresolved "capital additions" := rfl
+example : adjusted2024 ctx (.outrightGift (some 6000) (some 8000)) = .determined ⟨6000, 6000⟩ := rfl
+example : adjusted2024 ctx (.outrightGift none (some 8000)) = .unresolved "carryover basis" := rfl
+example : realized2024 ctx (some 10001) gift = .determined 1 := rfl
+example : realized2024 ctx (some 10000) gift = .determined 0 := rfl
+example : realized2024 ctx (some 9000) gift = .determined 0 := rfl
+example : realized2024 ctx (some 8000) gift = .determined 0 := rfl
+example : realized2024 ctx (some 7999) gift = .determined (-1) := rfl
+example : realized2024 ctx none gift = .unresolved "amount realized" := rfl
+example : adjusted2024 ctx .specialTreatment = .outsideScope "special basis or adjustment rule" := rfl
+example : adjusted2024 ⟨some .usFederal, some (.calendarYear 2025)⟩ gift = .outsideScope "taxable period" := rfl
+example : columnH2024 ctx (some 100) (some 120) (some 0) = .determined (-20) := rfl
+example : columnH2024 ctx (some 100) (some 120) (some 20) = .determined 0 := rfl
+example : columnH2024 ctx (some 120) (some 100) (some (-5)) = .determined 15 := rfl
+example : columnH2024 ctx (some 120) none (some 0) = .unresolved "column (e)" := rfl
+example : columnH2024 ctx (some 120) (some 100) none = .unresolved "column (g)" := rfl
+
+end CraneQTests.Property

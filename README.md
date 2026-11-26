@@ -85,3 +85,9 @@ Lot identification, basis adjustments and valuation happen upstream. Different
 gain and loss bases fall outside this exercise. Recognition under § 1001(c),
 loss deductibility, holding period, return reporting and form preparation require
 separate rules and evidence. [2024 U.S. Code, § 1001](https://www.govinfo.gov/content/pkg/USCODE-2024-title26/html/USCODE-2024-title26-subtitleA-chap1-subchapO-partI-sec1001.htm)
+
+### Property basis and the 2024 disposition worksheet
+
+[PropertyBasis](CraneQ/US/IRC/PropertyBasis.lean) computes gain and loss bases in cents for a single ordinary cash purchase with established capital additions, or an outright post-1920 gift meeting the documented assumptions. For a gift with $100 carryover basis and $80 gift-date fair market value, proceeds of $110 yield $10 realized gain, $90 yields zero, and $70 yields $10 realized loss. Depreciation, gift tax adjustments, lot identification, charitable bargain sales and other special treatments require separate rules. Use the special-treatment or unclassified input until the prerequisites are established.
+
+[Form8949](CraneQ/US/Forms/Form8949.lean) computes column (h) from the established whole-dollar entries in (d), (e) and (g). This function accepts rows with numeric proceeds and basis. Rows with a prescribed blank basis or an EXPIRED entry require separate reporting treatment. The caller determines reported basis and signed adjustments under the instructions. This worksheet uses its own reporting units and does not implicitly convert the engine's cents to dollars. Both modules cite the [pinned federal sources](https://github.com/craneq-io/tax-sources/tree/54739fc202d8c5f8fb1ad5659bb578067a6c188c).
